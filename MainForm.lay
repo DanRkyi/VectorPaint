@@ -1,0 +1,14 @@
+LAYOUT(MainFormLayout, 896, 420)
+	ITEM(PictureController, pictController, HSizePosZ(168, 16).VSizePosZ(8, 4))
+	ITEM(Upp::ColumnList, nameList, LeftPosZ(4, 156).VSizePosZ(44, 152))
+	ITEM(Upp::Button, moveSelected, SetLabel(t_("Move")).LeftPosZ(4, 56).BottomPosZ(129, 15))
+	ITEM(Upp::Button, resizeSelected, SetLabel(t_("Resize")).LeftPosZ(4, 56).BottomPosZ(105, 15))
+	ITEM(Upp::Button, proprtySelected, SetLabel(t_("Properties")).LeftPosZ(56, 56).BottomPosZ(77, 15))
+	ITEM(Upp::StaticText, dv___5, SetText(t_("Picture shapes:\n")).LeftPosZ(8, 84).TopPosZ(20, 24))
+	ITEM(Upp::Button, rotateButton, SetLabel(t_("Rotate+")).LeftPosZ(64, 44).BottomPosZ(129, 15))
+	ITEM(Upp::Button, rotateLeftButton, SetLabel(t_("Rotate-")).LeftPosZ(116, 48).BottomPosZ(129, 15))
+	ITEM(Upp::Button, scaleButton, SetLabel(t_("Scale+")).LeftPosZ(64, 44).BottomPosZ(105, 15))
+	ITEM(Upp::Button, scaleLeftButton, SetLabel(t_("Scale-")).LeftPosZ(116, 48).BottomPosZ(105, 15))
+	ITEM(Upp::StaticText, dv___10, SetText(t_("Add")).HSizePosZ(80, 764).TopPosZ(-4, 19))
+END_LAYOUT
+
