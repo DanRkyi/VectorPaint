@@ -6,16 +6,17 @@
 using namespace Upp;
 using namespace std;
 
+// Базовый класс для всех фигур
 class Shape {
     friend class OperationsHelper;
 
 protected:
-    String name;
-    Color color;
-    Color fillColor;
-    int width;
-    bool selected;
-    Vector<Point> points;
+    String name;             // Имя фигуры
+    Color color;             // Цвет фигуры
+    Color fillColor;         // Цвет заливки фигуры
+    int width;               // Толщина линии
+    bool selected;           // Флаг выбора фигуры
+    Vector<Point> points;    // Точки фигуры
 
 public:
     Shape(String nm) : name(nm), width(1), selected(true), color(Black()), fillColor(White()) {}
@@ -42,6 +43,7 @@ public:
     virtual void moveto(Point to) = 0;
 };
 
+// Класс для линии
 class Line : public Shape {
 public:
     Line(String name = "line") : Shape(name) {
@@ -63,6 +65,7 @@ public:
     }
 };
 
+// Класс для треугольника
 class Triangle : public Line {
 public:
     Triangle(String name = "triangle") : Line(name) {
@@ -89,6 +92,7 @@ public:
     }
 };
 
+// Класс для текста
 class TextShape : public Shape {
 public:
     TextShape(String name = "text") : Shape(name) {
@@ -105,6 +109,7 @@ public:
     }
 };
 
+// Класс для фрактала Мандельброта
 class Mandelbrot : public Line {
 private:
     Image img;
@@ -159,6 +164,7 @@ public:
     long double& getYScale() { return yscale; }
 };
 
+// Класс для эллипса
 class EllipseShape : public Shape {
 public:
     EllipseShape(String name = "ellipse") : Shape(name) {

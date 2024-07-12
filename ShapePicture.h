@@ -9,10 +9,9 @@ using namespace Upp;
 // Изображение из фигур
 // Хранит массив фигур изображения
 // выводит изображение на форму
-
 class ShapePicture {
 private:
-    Vector<Shape*> shps;
+    Vector<Shape*> shps; // Массив фигур
 
 public:
     ~ShapePicture() {
@@ -20,15 +19,18 @@ public:
             delete shps[i];
     }
 
+    // Отрисовка всех фигур
     void paint(Draw& w) {
         for (int i = 0; i < shps.size(); i++)
             shps[i]->paint(w);
     }
 
+    // Возвращает количество фигур
     int size() {
         return shps.size();
     }
 
+    // Получение фигуры по индексу
     Shape* getShape(int i) {
         if (i < size())
             return shps[i];
@@ -36,6 +38,7 @@ public:
             return NULL;
     }
 
+    // Добавление новой фигуры
     Shape* addShape(String kind) {
         Shape* sp = NULL;
         // Добавление новых типов фигур

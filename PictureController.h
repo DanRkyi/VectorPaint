@@ -9,29 +9,31 @@ using namespace Upp;
 
 // Контроллер изображения,
 // позволяет контролировать ввод мышью,
-// перемещение или измение координат фигур
-
+// перемещение или изменение координат фигур
 class PictureController : public Ctrl {
     enum mouseInputState { none, input, movoto, inputStart, resize };
 
 private:
-    ShapePicture* picture;
-    Shape* selShape = NULL;
-    mouseInputState state;
-    int clickCount;
-    int max;
-    Image cursor;
+    ShapePicture* picture;      // Объект изображения
+    Shape* selShape = NULL;     // Выбранная фигура
+    mouseInputState state;      // Состояние ввода мыши
+    int clickCount;             // Счетчик кликов
+    int max;                    // Максимальное количество точек для ввода/перемещения
+    Image cursor;               // Изображение курсора
 
+    // Установка курсора
     void setCursor() {
         cursor = OverrideCursor(CtrlImg::cross());
     }
 
 public:
+    // Инициализация контроллера
     void init(ShapePicture* pic) {
         picture = pic;
         state = mouseInputState::none;
     }
 
+    // Начало ввода точек фигуры
     void startInput(Shape* shp) {
         state = mouseInputState::inputStart;
         selShape = shp;
@@ -40,6 +42,7 @@ public:
         setCursor();
     }
 
+    // Начало перемещения фигуры
     void startMove(Shape* shp) {
         state = mouseInputState::movoto;
         selShape = shp;
@@ -48,6 +51,7 @@ public:
         setCursor();
     }
 
+    // Начало изменения размеров фигуры
     void startResize(Shape* shp) {
         state = mouseInputState::resize;
         selShape = shp;
@@ -56,11 +60,13 @@ public:
         setCursor();
     }
 
+    // Отрисовка контроллера
     void Paint(Draw& w) override {
         w.DrawRect(GetSize(), White());
         picture->paint(w);
     }
 
+    // Обработка движения мыши
     void MouseMove(Point p, dword keyflags) override {
         if (selShape != NULL)
             switch (state) {
@@ -78,6 +84,7 @@ public:
         Refresh();
     }
 
+    // Обработка нажатия левой кнопки мыши
     void LeftDown(Point, dword) override {
         if (state == mouseInputState::inputStart)
             state = mouseInputState::resize;

@@ -6,10 +6,10 @@
 
 using namespace Upp;
 
-// Класс помощник ввода свойст фигур
-
+// Класс помощник ввода свойств фигур
 class PropertyHelper {
 private:
+    // Диалог ввода свойств для фрактала
     static bool fractDialog(Mandelbrot* shp) {
         if (shp == NULL) return false;
 
@@ -41,13 +41,13 @@ private:
         return true;
     }
 
-    // Подходит простым фигурам
+    // Диалог ввода свойств для простых фигур
     static void commDialog(Shape* shp) {
         TopWindow app;
         Button ok;
         app.SetRect(0, 0, Zx(200), Zy(90));
 
-        EditString name; // поле ввода
+        EditString name; // поле ввода имени фигуры
         ColorPusher col; // выбор цвета
         SliderCtrl sld;  // ползунок толщины линий
 
@@ -72,8 +72,9 @@ private:
     }
 
 public:
+    // Показ диалога ввода свойств
     static void showDialog(Shape* shp) {
-        // Добавить новую функцию для ввода особенных свойст вигур
+        // Добавить новую функцию для ввода особенных свойств фигур
         if (fractDialog(dynamic_cast<Mandelbrot*>(shp)));
         else commDialog(shp);
     }

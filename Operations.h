@@ -9,6 +9,7 @@ using namespace Upp;
 // Операции преобразования фигур, поворот, масштаб
 class OperationsHelper {
 private:
+    // Расчет центра фигуры
     static Point center(Shape* shp) {
         Point c = { 0, 0 };
         for (int i = 0; i < shp->size(); i++) {
@@ -21,6 +22,7 @@ private:
     }
 
 public:
+    // Поворот фигуры на заданный угол
     static void rotate(Shape* shp, int angle) {
         double rad = angle * M_PI / 180;
         Point cnt = center(shp);
@@ -32,6 +34,7 @@ public:
         }
     }
 
+    // Масштабирование фигуры
     static void scale(Shape* shp, double k) {
         Point cnt = center(shp);
         for (int i = 0; i < shp->size(); i++) {

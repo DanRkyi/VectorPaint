@@ -7,8 +7,6 @@
 #include "Propertys.h"
 #include "Operations.h"
 
-
-
 #define LAYOUTFILE <VectorPaint/MainForm.lay>
 #include <CtrlCore/lay.h>
 
@@ -20,13 +18,13 @@ using namespace Upp;
 
 // Главная форма программы
 // содержит изображение
-
 class MainForm : public WithMainFormLayout<TopWindow> {
 private:
-    MenuBar menu;
-    ToolBar tool;
-    ShapePicture pict;
+    MenuBar menu;        // Меню
+    ToolBar tool;        // Панель инструментов
+    ShapePicture pict;   // Объект, содержащий фигуры
 
+    // Обновление списка фигур
     void updateList(bool newshape = false) {
         int c = nameList.GetCursor();
         nameList.Clear();
@@ -39,39 +37,42 @@ private:
             nameList.SetCursor(c);
     }
 
+    // Обновление выбранной фигуры
     void updateSelected() {
         int c = nameList.GetCursor();
         for (int i = 0; i < pict.size(); i++)
             pict.getShape(i)->setSelect(i == c);
     }
 
+    // Выход из программы
     void Exit() {
         if (PromptOKCancel("Exit Paint?"))
             Break();
     }
 
-
+    // Настройка панели инструментов
     void ToolBar(Bar& bar) {
-        
-        // Add shape creation buttons
         AddShapeButton(bar, "Line", Icons::line(), "line");
         AddShapeButton(bar, "Triangle", Icons::triangle(), "tri");
         AddShapeButton(bar, "Fractal", Icons::fractal(), "frc");
         AddShapeButton(bar, "Text", Icons::text(), "text");
         AddShapeButton(bar, "Ellipse", Icons::ellipse(), "ellipse");
-        
+
         bar.Separator();
         bar.Add(CtrlImg::remove(), [=] { Exit(); }).Tip("Exit");
     }
 
+    // Добавление кнопки фигуры на панель инструментов
     void AddShapeButton(Bar& bar, const char* tooltip, const Image& img, const String& shapeType) {
         bar.Add(img, [=] { BarFn(shapeType); }).Tip(tooltip);
     }
 
+    // Обработчик меню
     void MenuFn() {
         PromptOK("Fn activated!");
     }
 
+    // Обработчик панели инструментов
     void BarFn(String shapeType) {
         Shape* shp = pict.addShape(shapeType);
         pictController.startInput(shp);
@@ -84,7 +85,6 @@ public:
         Zoomable().Sizeable();
 
         pictController.init(&pict);
-
 
         moveSelected << [=] {
             if (nameList.GetCursor() >= 0) {
